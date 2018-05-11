@@ -14,6 +14,8 @@ namespace WpfChat.WPFDataClasses
 
         private ContactInfoData _Data;
 
+        public ContactInfoData ContactInfoData => _Data;
+
         public string Name
         {
             get

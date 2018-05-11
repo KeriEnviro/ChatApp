@@ -13,6 +13,9 @@
             <ColumnDefinition Width="50"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+        <Button Name="Contact" Click="Contact_Click" Background="#00000000" Grid.ColumnSpan="2" />
+
         <Grid Grid.Column="0">
             <Grid Width="42" Height="42">
                 <Image Source="../images/profile_photo.png" Stretch="Fill"></Image>

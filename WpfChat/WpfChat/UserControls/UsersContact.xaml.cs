@@ -21,6 +21,7 @@ namespace WpfChat.User_Controls
     /// </summary>
     public partial class UsersContact : UserControl
     {
+        public Action<int> OnContactClicked;
         public WPFContact _WPFContact;
 
         public UsersContact()
@@ -35,6 +36,18 @@ namespace WpfChat.User_Controls
             NickName.Text = pContact._ContactInfoData._NickName;
 
             _WPFContact.SetContactData(pContact._ContactInfoData);
+        }
+
+        private void Contact_Click(object sender, RoutedEventArgs e)
+        {
+            OnContactClicked?.Invoke(_WPFContact.ContactInfoData._ID);
+
+            Console.WriteLine(_WPFContact.ContactInfoData._ID.ToString());
+
+            /*if (OnContactClicked != null)
+            {
+                OnContactClicked(0);
+            }*/
         }
     }
 }

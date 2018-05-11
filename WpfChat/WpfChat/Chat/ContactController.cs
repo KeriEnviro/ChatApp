@@ -14,20 +14,7 @@ namespace WpfChat.ChatApp
         {
             _Chat = pChat;
 
-            List<Contact> contacts = new List<Contact>();
-            ContactInfoData data = new ContactInfoData();
-            data._NickName = "Ahoj";
-            contacts.Add(new Contact(data));
-            data._NickName = "Ahoj2";
-            contacts.Add(new Contact(data));
-            data._NickName = "Ahoj3";
-            contacts.Add(new Contact(data));
-            data._NickName = "Ahoj4";
-            contacts.Add(new Contact(data));
-            data._NickName = "Ahoj5";
-            contacts.Add(new Contact(data));
-
-            _Chat.User.AddContacts(contacts);
+            TestContacts();
         }
 
         public void SearchContact(string pNickName)
@@ -63,6 +50,20 @@ namespace WpfChat.ChatApp
         public List<Contact> GetContacts()
         {
             return _Chat.User.GetContactList();
+        }
+
+        private void TestContacts()
+        {
+            List<Contact> contacts = new List<Contact>();
+            for (int i = 0; i < 15; i++)
+            {
+                ContactInfoData data = new ContactInfoData();
+                data._NickName = "Ahoj" + i;
+                data._ID = i;
+                contacts.Add(new Contact(data));
+            }
+
+            _Chat.User.AddContacts(contacts);
         }
     }
 }
