@@ -15,6 +15,13 @@ namespace WpfChat.ChatApp
             _Chat = pChat;
         }
 
+        public List<Message> GetContactMessages(int pID)
+        {
+            List<Message> messages = _Chat.User.GetContactDict()[pID].GetMessages();
+
+            return messages;
+        }
+
         public void SendMessage(Message pMessage)
         {
 

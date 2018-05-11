@@ -67,13 +67,13 @@
 
                 <Grid Grid.Row="1">
                     <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,0,5,0">
-                        <StackPanel Orientation="Vertical">
-                            <controls1:IncomingMessage/>
+                        <StackPanel Name="Messages" Orientation="Vertical">
+                            <!--<controls1:IncomingMessage/>
                             <controls1:OutcomingMessage/>
                             <controls1:OutcomingMessage/>
                             <controls1:OutcomingMessage/>
                             <controls1:IncomingMessage/>
-                            <controls1:IncomingMessage/>
+                            <controls1:IncomingMessage/>-->
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

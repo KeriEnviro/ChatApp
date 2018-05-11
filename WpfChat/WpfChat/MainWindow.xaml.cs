@@ -23,6 +23,8 @@ namespace WpfChat
     public partial class MainWindow : Window
     {
         private List<User_Controls.UsersContact> contacts = new List<User_Controls.UsersContact>();
+        private List<UserControls.OutcomingMessage> messages = new List<UserControls.OutcomingMessage>();
+
         private Chat chat;
 
         public MainWindow()
@@ -50,6 +52,28 @@ namespace WpfChat
                 control.UpdateContact(contactList[i]);
                 UsersContacts.Children.Add(control);
                 contacts.Add(control);
+                control.OnContactClicked += OnContactClicked;
+            }
+        }
+
+        private void OnContactClicked(int pID)
+        {
+            RefreshData(pID);
+        }
+
+        private void RefreshData(int pID)
+        {
+            Messages.Children.Clear();
+            messages.Clear();
+
+            List<Message> messageList = chat.GetContactMessages(pID);
+
+            for (int i = 0; i < messageList.Count; i++)
+            {
+                UserControls.OutcomingMessage control = new WpfChat.UserControls.OutcomingMessage();
+
+                Messages.Children.Add(control);
+                messages.Add(control);
             }
         }
 

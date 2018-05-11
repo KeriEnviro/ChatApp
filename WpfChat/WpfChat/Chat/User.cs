@@ -40,7 +40,7 @@ namespace WpfChat.ChatApp
         public void AddContact(Contact pContact)
         {
             _ContactList.Add(pContact);
-            _ContactDict.Add(0, pContact);
+            _ContactDict.Add(pContact._ContactInfoData._ID, pContact);
         }
 
         public void AddContacts(List<Contact> pContact)
@@ -49,7 +49,7 @@ namespace WpfChat.ChatApp
             {
                 Contact contact = pContact[i];
                 _ContactList.Add(contact);
-                //_ContactDict.Add(0, contact);
+                _ContactDict.Add(contact._ContactInfoData._ID, contact);
             }
         }
 
@@ -66,7 +66,7 @@ namespace WpfChat.ChatApp
 
         public Dictionary<int, Contact> GetContactDict()
         {
-            return null;
+            return _ContactDict;
         }
         
         public void UpdataUserInfo(UserInfoData pUserInfoData)

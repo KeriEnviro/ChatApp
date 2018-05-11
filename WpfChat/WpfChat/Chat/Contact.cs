@@ -29,6 +29,11 @@ namespace WpfChat.ChatApp
             _MessageList.Add(pMessage);
         }
 
+        public void AddMessages(List<Message> pMessages)
+        {
+            _MessageList = pMessages;
+        }
+
         public void DeleteMessage(Message pMessage)
         {
             _MessageList.Remove(pMessage);

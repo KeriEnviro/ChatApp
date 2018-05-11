@@ -75,6 +75,11 @@ namespace WpfChat.ChatApp
             _MessageController.DeleteMessage(pMessage);
         }
 
+        public List<Message> GetContactMessages(int pID)
+        {
+            return _MessageController.GetContactMessages(pID);
+        }
+
         #endregion
 
         #region Contact controller
