@@ -19,7 +19,7 @@ namespace WpfChat.ChatApp
 
     public class Message
     {
-        private MessageInfoData _MessageInfoData;
+        public MessageInfoData _MessageInfoData;
 
         public Message(MessageInfoData pMessageInfoData)
         {

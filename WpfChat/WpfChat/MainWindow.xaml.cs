@@ -26,6 +26,7 @@ namespace WpfChat
         private List<UserControls.OutcomingMessage> messages = new List<UserControls.OutcomingMessage>();
 
         private Chat chat;
+        private int _CurrentContactID;
 
         public MainWindow()
         {
@@ -58,6 +59,7 @@ namespace WpfChat
 
         private void OnContactClicked(int pID)
         {
+            _CurrentContactID = pID;
             RefreshData(pID);
         }
 
@@ -71,7 +73,7 @@ namespace WpfChat
             for (int i = 0; i < messageList.Count; i++)
             {
                 UserControls.OutcomingMessage control = new WpfChat.UserControls.OutcomingMessage();
-
+                control.SetMessage(messageList[i]._MessageInfoData._Content);
                 Messages.Children.Add(control);
                 messages.Add(control);
             }
@@ -100,6 +102,30 @@ namespace WpfChat
 
             Console.WriteLine(newUserData._ID.ToString());
             Console.WriteLine(newUserData._Email.ToString());
+        }
+
+        private void SendMSGTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && SendMSGTextBox.Text != "")
+            {
+                string s = SendMSGTextBox.Text;
+                SendMSGTextBox.Text = "";
+
+                MessageInfoData data = new MessageInfoData()
+                {
+                    _Content = s,
+                    _Date = DateTime.Now,
+                    _ID = 0,
+                    _MessageDirectionType = MessageDirectionType.Outcome,
+                    _MessageStateType = MessageStateType.Send,
+                    _MessageType = MessageType.Text
+                };
+
+                Message message = new Message(data);
+                chat.SendMessage(_CurrentContactID, message);
+
+                RefreshData(_CurrentContactID);
+            }
         }
     }
 }

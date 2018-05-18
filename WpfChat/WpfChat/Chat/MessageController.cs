@@ -22,9 +22,9 @@ namespace WpfChat.ChatApp
             return messages;
         }
 
-        public void SendMessage(Message pMessage)
+        public void SendMessage(int pContactID, Message pMessage)
         {
-
+            _Chat.User.GetContactDict()[pContactID].AddMessage(pMessage);
         }
 
         public void ReceiveMessage(Message pMessage)

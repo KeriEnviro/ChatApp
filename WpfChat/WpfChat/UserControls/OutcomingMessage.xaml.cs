@@ -24,5 +24,10 @@ namespace WpfChat.UserControls
         {
             InitializeComponent();
         }
+
+        public void SetMessage(string pMessage)
+        {
+            MessageText.Text = pMessage;
+        }
     }
 }
