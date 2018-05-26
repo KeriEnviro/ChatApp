@@ -35,17 +35,17 @@ namespace WpfChat
             chat = new Chat();
             chat.OnUserLogin += OnUserLogin;
 
-            RefreshData();
+            RefreshData(chat.GetContacts());
 
             //JSONExample();
         }
 
-        private void RefreshData()
+        private void RefreshData(List<Contact> pContactList)
         {
             UsersContacts.Children.Clear();
             contacts.Clear();
 
-            List<Contact> contactList = chat.GetContacts();
+            List<Contact> contactList = pContactList;
 
             for (int i = 0; i < contactList.Count; i++)
             {
@@ -126,6 +126,16 @@ namespace WpfChat
 
                 RefreshData(_CurrentContactID);
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (chat == null) return;
+
+            TextBox text = (TextBox)sender;
+            string s = text.Text;
+
+            RefreshData(chat.GetContacts(s));
         }
     }
 }

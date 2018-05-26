@@ -89,6 +89,11 @@ namespace WpfChat.ChatApp
             return _ContactController.GetContacts();
         }
 
+        public List<Contact> GetContacts(string pSearchText)
+        {
+            return _ContactController.GetContacts(pSearchText);
+        }
+
         #endregion
     }
 }

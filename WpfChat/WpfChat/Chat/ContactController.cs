@@ -52,6 +52,26 @@ namespace WpfChat.ChatApp
             return _Chat.User.GetContactList();
         }
 
+        public List<Contact> GetContacts(string pSearchText)
+        {
+            List<Contact> userContactList = GetContacts();
+            List<Contact> contacts = 
+                userContactList.Where(x => x._ContactInfoData._NickName.Contains(pSearchText)).ToList();
+
+            /*List<Contact> contacts = new List<Contact>();
+
+            for (int i = 0; i < userContactList.Count; i++)
+            {
+                Contact contact = userContactList[i];
+                if (contact._ContactInfoData._NickName.Contains(pSearchText))
+                {
+                    contacts.Add(contact);
+                }
+            }*/
+
+            return contacts;
+        }
+
         private void TestContacts()
         {
             List<Contact> contacts = new List<Contact>();
