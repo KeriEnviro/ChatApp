@@ -58,6 +58,11 @@ namespace WpfChat.ChatApp
             OnUserLogout?.Invoke();
         }
 
+        public User GetUser()
+        {
+            return _User;
+        }
+
         #region MessageController methods
 
         public void SendMessage(int pContactID, Message pMessage)

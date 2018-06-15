@@ -95,6 +95,9 @@ namespace WpfChat
             //Tento radek prevede UserInfoData na typ string
             string s = JsonConvert.SerializeObject(data);
 
+            User user = chat.GetUser();
+            string suser = JsonConvert.SerializeObject(user);
+
             Console.WriteLine(s);
 
             //Tento radek prevede string na typ UserInfoData
