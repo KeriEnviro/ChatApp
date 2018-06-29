@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfChat.ChatApp;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 
 namespace WpfChat
 {
@@ -28,6 +29,9 @@ namespace WpfChat
         private Chat chat;
         private int _CurrentContactID;
 
+        private SqlConnection _Connection = null;
+        private const string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\DEV\ChatApp\WpfChat\WpfChat\DBChat.mdf;Integrated Security=True";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +40,17 @@ namespace WpfChat
             chat.OnUserLogin += OnUserLogin;
 
             RefreshData(chat.GetContacts());
+
+            _Connection = new SqlConnection(ConnectionString);
+
+            try
+            {
+                _Connection.Open();
+            }
+            catch
+            {
+                MessageBox.Show("Nepodarilo se pripojeni do DB!!!");
+            }
 
             //JSONExample();
         }
