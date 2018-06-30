@@ -38,6 +38,48 @@ namespace ChatServer.SQLQueries
             return rows == 1;
         }
 
+        public static long LoginUser(string pEmail, string pPassword, SqlConnection pConnection)
+        {
+            string passHash = MD5Hash(pPassword);
+            string query = "select IDUser from UserLogin where Email = @email and Password = @pass";
+            SqlCommand cmd = new SqlCommand(query, pConnection);
+            cmd.Parameters.AddWithValue("@email", pEmail);
+            cmd.Parameters.AddWithValue("@pass", passHash);
+
+            long userID = -1;
+            SqlDataReader dataReader = cmd.ExecuteReader();
+            if (dataReader.HasRows)
+            {
+                dataReader.Read();
+                userID = dataReader.GetInt64(0);
+            }
+            dataReader.Dispose();
+
+            if (userID != -1)
+            {
+                UpdateUserState(userID, 1, pConnection);
+            }
+
+            return userID;
+        }
+
+        public static bool UpdateUserState(long pUserID, int pUserState, SqlConnection pConnection)
+        {
+            string query = "update UserLogin set LastAccess = GETDATE(), UserState = @state where IDUser = @id";
+            SqlCommand cmd = new SqlCommand(query, pConnection);
+            cmd.Parameters.AddWithValue("@id", pUserID);
+            cmd.Parameters.AddWithValue("@state", pUserState);
+
+            int rows = cmd.ExecuteNonQuery();
+
+            return rows == 1;
+        }
+
+        public static bool LogoutUser(long pUserID, SqlConnection pConnection)
+        {
+            return UpdateUserState(pUserID, 2, pConnection);
+        }
+
         public static string MD5Hash(string input)
         {
             using (var md5 = MD5.Create())
